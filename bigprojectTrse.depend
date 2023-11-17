@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1700160880 source:c:\users\dell\desktop\small projects in langage c\bigprojecttrse\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
