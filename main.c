@@ -247,12 +247,12 @@ void titel_Score() {
         return;
     }
 
-    struct Entry entries[10];
+    struct Entry entries[100];  // Assuming a maximum of 100 entries, adjust as needed
 
     // Read entries from the file
     int i = 0;
     char line[MAX_LENGTH];
-    while (fgets(line, MAX_LENGTH, file) != NULL && i < 10) {
+    while (fgets(line, MAX_LENGTH, file) != NULL && i < 100) {
         // Use sscanf to extract name and points from the line
         if (sscanf(line, "Full Name: %s Points: %d", entries[i].YourFullName, &entries[i].points) == 2) {
             i++;
@@ -264,9 +264,10 @@ void titel_Score() {
     // Sort entries by points in descending order
     qsort(entries, i, sizeof(struct Entry), compareEntries);
 
-    // Display the names and points
+    // Display the top 10 names and points
     printf("\n");
-    for (int j = 0; j < i; j++) {
+    int displayCount = i < 10 ? i : 10;
+    for (int j = 0; j < displayCount; j++) {
         printf("Top %d: %s - Points: %d\n", j + 1, entries[j].YourFullName, entries[j].points);
     }
     printf("\n");
