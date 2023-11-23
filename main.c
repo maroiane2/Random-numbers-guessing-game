@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+
 #define MAX_LENGTH 256 // You can adjust the maximum length of the name
 
 int colictscore;
@@ -55,19 +56,6 @@ int main() {
     scanf("%d", &NumDigits);
     printf("\n");
 
-
-    // Convert the number to "*" etc. //
-    if (NumDigits == 1) {
-        NumDigits = 3;
-        colictscore = 100;
-    } else if (NumDigits == 2) {
-        NumDigits = 5;
-        colictscore = 300;
-    } else {
-        colictscore = 500;
-        NumDigits = 7;
-    }
-
     // Repeat if the number is not required //
     while (NumDigits < 1 || NumDigits > 3) {
         printf("Select the number 1 or 2 or 3 : ");
@@ -79,17 +67,8 @@ int main() {
     scanf("%d", &maxAttempts);
     printf("\n");
 
-    // Attempts Score
-    int AttemptsScore = maxAttempts/2;
-    if(maxAttempts <= 4){
-        colictscore = colictscore+5000;
-    }else if(maxAttempts <= 8){
-        colictscore = colictscore+3000;
-    }else if(maxAttempts <= 16){
-        colictscore = colictscore+1000;
-    }else if(maxAttempts <= 20){
-        colictscore = colictscore+500;
-    }
+
+
     //  same location or Not in the same location.
     int testo;
     printf("- Select what do you want -\n 1: same location.\n 2: Not in the same location.\n\n");
@@ -109,7 +88,14 @@ int main() {
     titel_game();
     printf("\n\n");
 
-
+    // Convert the number to "*" etc. //
+    if (NumDigits == 1) {
+        NumDigits = 3;
+    } else if (NumDigits == 2) {
+        NumDigits = 5;
+    } else {
+        NumDigits = 7;
+    }
     // random number //
     srand(time(NULL));
     int randomNum[7]; // maximum number of random numbers is 7 //
@@ -146,6 +132,24 @@ int main() {
         printf("-you Select :same location.\n");
     } else if (testo == 2) {
         printf("-you Select :Not in the same location.\n");
+    }
+
+            // Attempts Score
+    int AttemptsScore;
+    if(maxAttempts <= 4){
+        colictscore = colictscore+5000;
+    }else if(maxAttempts <= 8){
+        colictscore = colictscore+3000;
+    }else if(maxAttempts <= 16){
+        colictscore = colictscore+1000;
+    }else if(maxAttempts <= 20){
+        colictscore = colictscore+500;
+    }
+
+
+    int sameAttempts;
+        if (testo == 1) {
+        colictscore = colictscore *2;
     }
 
     printf("Write %d numbers in each attempt - \n", NumDigits);
@@ -187,18 +191,13 @@ int main() {
         }
 
 
-       if (attempt <= AttemptsScore) {
-           colictscore = colictscore * 1.2;
-       } else {
-           colictscore = colictscore * 1.1;
-       }
+        if (attempt <= AttemptsScore) {
+            colictscore = colictscore * 0.889;
+        } else {
+            colictscore = colictscore * 0.88;
+        }
 
         printf("\n");
-    }
-
-    int sameAttempts;
-    if (testo == 1) {
-        colictscore = colictscore *2;
     }
 
 
@@ -260,7 +259,6 @@ void titel_Score() {
 
     int maxEntries = 100000;  // Adjust as needed
     struct Entry *entries = malloc(maxEntries * sizeof(struct Entry));
-
     // Read entries from the file
     int i = 0;
     char line[MAX_LENGTH];
@@ -287,11 +285,6 @@ void titel_Score() {
     printf("======================================================\n");
     printf("======================================================\n");
 }
-
-
-
-
-
 
 void Save_name() {
     char YourFullName[MAX_LENGTH];
